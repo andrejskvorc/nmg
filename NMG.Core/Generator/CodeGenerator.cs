@@ -434,6 +434,7 @@ namespace NMG.Core.Generator
             entireContent = RemoveComments(entireContent);
             entireContent = AddStandardHeader(entireContent);
             entireContent = FixAutoProperties(entireContent);
+            entireContent = FixGuid(entireContent); //Added hack to fix Guid 
             entireContent = FixNullableTypes(entireContent);
             //Fix Attrubutes with blank parenthesis
             entireContent = entireContent.Replace("()]", "]");
@@ -471,11 +472,31 @@ namespace NMG.Core.Generator
             }
             return entireContent;
         }
+
+        //Hack: Fix System.Guid to Guid
+        private string FixGuid(string entireContent)
+        {
+            if (appPrefs.Language == Language.CSharp)
+            {
+                //Just remove the "System." from Guid type. (we already have the "using System;" statement)
+                entireContent = entireContent.Replace("System.Guid", "Guid");
+
+            }
+            else if (appPrefs.Language == Language.VB)
+            {
+                entireContent = entireContent.Replace("System.Guid", "Guid"); //Added Guid as nullable type
+
+            }
+            return entireContent;
+        }
+
         // Hack : Fix Nullable Types, use "int?" instead of System.Nullable<int>.
         private string FixNullableTypes(string entireContent)
         {
             if (appPrefs.Language == Language.CSharp)
             {
+                entireContent = entireContent.Replace("System.Nullable<Guid>", "Guid?"); //Added Guid as nullable type
+                entireContent = entireContent.Replace("System.Nullable<System.Guid>", "Guid?"); //Added Guid as nullable type
                 entireContent = entireContent.Replace("System.Nullable<bool>", "bool?");
                 entireContent = entireContent.Replace("System.Nullable<int>", "int?");
                 entireContent = entireContent.Replace("System.Nullable<byte>", "byte?");
@@ -489,6 +510,8 @@ namespace NMG.Core.Generator
                 entireContent = entireContent.Replace("System.DateTime", "DateTime");
             } else if (appPrefs.Language == Language.VB)
             {
+                entireContent = entireContent.Replace("System.Nullable(Of Guid)", "Guid?"); //Added Guid as nullable type
+                entireContent = entireContent.Replace("System.Nullable(Of System.Guid)", "Guid?"); //Added Guid as nullable type
                 entireContent = entireContent.Replace("System.Nullable(Of Boolean)", "Boolean?");
                 entireContent = entireContent.Replace("System.Nullable(Of Integer)", "Integer?");
                 entireContent = entireContent.Replace("System.Nullable(Of Byte)", "Byte?");
@@ -517,6 +540,10 @@ namespace NMG.Core.Generator
                 scopeStatements.Add("NHibernate.Validator.Constraints");
             }
             if (appPrefs.ForeignEntityCollectionType.Contains("Iesi.Collections"))
+            {
+                scopeStatements.Add("Iesi.Collections.Generic");
+            }
+            if (appPrefs.ForeignEntityCollectionType.Contains("ISet")) //added for Iset instead complete Iesi.Collections.Generic
             {
                 scopeStatements.Add("Iesi.Collections.Generic");
             }

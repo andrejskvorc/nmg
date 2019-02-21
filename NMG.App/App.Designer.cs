@@ -817,6 +817,7 @@ namespace NHibernateMappingGenerator
             this.comboBoxForeignCollection.Items.AddRange(new object[] {
             "IList",
             "ICollection",
+            "ISet", //Added Iset so we dont have Full Iesi.Collections.Generic.ISet, and added in Using/Import statment Iesi.Collections.Generic.ISet
             "Iesi.Collections.Generic.ISet"});
             this.comboBoxForeignCollection.Location = new System.Drawing.Point(15, 126);
             this.comboBoxForeignCollection.Name = "comboBoxForeignCollection";

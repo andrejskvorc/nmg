@@ -140,6 +140,9 @@ namespace NMG.Core.Generator
                 builder.AppendLine();
                 if (appPrefs.ForeignEntityCollectionType.Contains("Iesi.Collections"))
                     builder.AppendLine("using Iesi.Collections.Generic;");
+                if (appPrefs.ForeignEntityCollectionType.Contains("ISet"))//added for Iset instead complete Iesi.Collections.Generic
+                    builder.AppendLine("using Iesi.Collections.Generic;");
+
             }
             else if (appPrefs.Language == Language.VB)
             {
@@ -152,6 +155,8 @@ namespace NMG.Core.Generator
                 builder.AppendFormat("Imports {0}", appPrefs.NameSpace);
                 builder.AppendLine();
                 if (appPrefs.ForeignEntityCollectionType.Contains("Iesi.Collections"))
+                    builder.AppendLine("Imports Iesi.Collections.Generic");
+                if (appPrefs.ForeignEntityCollectionType.Contains("ISet"))//added for Iset instead complete Iesi.Collections.Generic
                     builder.AppendLine("Imports Iesi.Collections.Generic");
 
                 entireContent = entireContent.Replace("Option Strict Off", string.Empty);

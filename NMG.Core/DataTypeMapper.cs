@@ -196,6 +196,8 @@ namespace NMG.Core
                 case "TIMESTAMP":
                 case "TIMESTAMP WITH TIME ZONE":
                 case "TIMESTAMP WITH LOCAL TIME ZONE":
+                case "TIMESTAMP WITHOUT TIME ZONE": //Added TIMESTAMP WITHOUT TIME ZONE
+                case "TIMESTAMP WITHOUT LOCAL TIME ZONE": //Added TIMESTAMP WITHOUT LOCAL TIME ZONE
                 case "SMALLDATETIME":
                 case "TIME":
                     return typeof(DateTime);
@@ -218,8 +220,10 @@ namespace NMG.Core
                     return typeof(int);
 
                 case "BINARY_DOUBLE":
-                case "NUMERIC":
                     return typeof(double);
+
+                case "NUMERIC":
+                    return typeof(decimal);//Added decimal is more appropriet for Numeric
 
                 case "FLOAT":
                 case "BINARY_FLOAT":
@@ -231,6 +235,7 @@ namespace NMG.Core
                 case "BINARY":
                 case "IMAGE":
                 case "VARBINARY":
+                case "BYTEA": //Added BYTEA
                     return typeof(byte[]);
 
                 case "INTERVAL DAY TO SECOND":
@@ -238,8 +243,8 @@ namespace NMG.Core
 
                 case "BIT":
                 case "BOOLEAN":
-                    return typeof(Boolean);
-
+                    return typeof(Boolean); 
+                
                 case "DECIMAL":
                 case "MONEY":
                 case "SMALLMONEY":
@@ -249,6 +254,9 @@ namespace NMG.Core
                     return typeof(Single);
 
                 case "UNIQUEIDENTIFIER":
+                    return typeof(Guid);
+
+                case "UUID": //Added UUID to Guid Mapping
                     return typeof(Guid);
 
                 default:
