@@ -17,10 +17,13 @@ namespace NMG.Core
         public string FolderPath { get; set; }
 
         public string DomainFolderPath { get; set; }
+        public string CrudFolderPath { get; set; }
 
         public string NameSpace { get; set; }
 
         public string NameSpaceMap { get; set; }
+
+        public string NameSpaceCrud { get; set; }
 
         public string AssemblyName { get; set; }
 

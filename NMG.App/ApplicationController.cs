@@ -9,6 +9,7 @@ namespace NHibernateMappingGenerator
         private readonly ApplicationPreferences applicationPreferences;
         private readonly CastleGenerator castleGenerator;
         private readonly CodeGenerator codeGenerator;
+        private readonly CrudGenerator crudGenerator;
         private readonly FluentGenerator fluentGenerator;
         private readonly MappingGenerator mappingGenerator;
         private readonly ContractGenerator contractGenerator;
@@ -18,6 +19,7 @@ namespace NHibernateMappingGenerator
         public ApplicationController(ApplicationPreferences applicationPreferences, Table table)
         {
             this.applicationPreferences = applicationPreferences;
+            crudGenerator = new CrudGenerator(applicationPreferences, table);
             codeGenerator = new CodeGenerator(applicationPreferences, table);
             fluentGenerator = new FluentGenerator(applicationPreferences, table);
             entityFrameworkGenerator = new EntityFrameworkGenerator(applicationPreferences, table);
@@ -34,6 +36,7 @@ namespace NHibernateMappingGenerator
             }
         }
 
+        public string GeneratedCrudeCode { get; set; }
         public string GeneratedDomainCode { get; set; }
         public string GeneratedMapCode { get; set; }
 
@@ -41,6 +44,7 @@ namespace NHibernateMappingGenerator
         {
             codeGenerator.Generate(writeToFile);
             GeneratedDomainCode = codeGenerator.GeneratedCode;
+            GeneratedCrudeCode = crudGenerator.GeneratedCode;
 
             if (applicationPreferences.IsFluent)
             {

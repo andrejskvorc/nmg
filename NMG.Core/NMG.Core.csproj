@@ -95,9 +95,11 @@
     <Compile Include="FieldNamingConvention.cs" />
     <Compile Include="Fluent\DBColumnMapper.cs" />
     <Compile Include="Fluent\Constants.cs" />
+    <Compile Include="Generator\AbstractCrudGenerator.cs" />
     <Compile Include="Generator\AbstractCodeGenerator.cs" />
     <Compile Include="Generator\CastleGenerator.cs" />
     <Compile Include="Generator\CodeGenerationHelper.cs" />
+    <Compile Include="Generator\CrudGenerator.cs" />
     <Compile Include="Generator\ContractGenerator.cs" />
     <Compile Include="Generator\EntityFrameworkGenerator.cs" />
     <Compile Include="Generator\CUBRIDMappingGenerator.cs" />

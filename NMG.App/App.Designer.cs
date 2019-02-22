@@ -70,9 +70,17 @@ namespace NHibernateMappingGenerator
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.mapCodeFastColoredTextBox = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.mapCodeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyMapCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.domainCodeFastColoredTextBox = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.domainCodeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyDomainCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.crudCodeFastColoredTextBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.namespaceCrudLabel = new System.Windows.Forms.Label();
+            this.namespaceCrudTextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -118,6 +126,7 @@ namespace NHibernateMappingGenerator
             this.noValidationRadioButton = new System.Windows.Forms.RadioButton();
             this.nhibernateValidationRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.entityFrameworkRadionBtn = new System.Windows.Forms.RadioButton();
             this.castleMappingOption = new System.Windows.Forms.RadioButton();
             this.fluentMappingOption = new System.Windows.Forms.RadioButton();
             this.hbmMappingOption = new System.Windows.Forms.RadioButton();
@@ -136,7 +145,11 @@ namespace NHibernateMappingGenerator
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.entityFrameworkRadionBtn = new System.Windows.Forms.RadioButton();
+            this.crudCodeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyCrudCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label10 = new System.Windows.Forms.Label();
+            this.crudFolderTextBox = new System.Windows.Forms.TextBox();
+            this.crudFolderSelectButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbTableDetailsGridView)).BeginInit();
             this.mainTabControl.SuspendLayout();
             this.basicSettingsTabPage.SuspendLayout();
@@ -149,8 +162,12 @@ namespace NHibernateMappingGenerator
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapCodeFastColoredTextBox)).BeginInit();
+            this.mapCodeContextMenuStrip.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.domainCodeFastColoredTextBox)).BeginInit();
+            this.domainCodeContextMenuStrip.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crudCodeFastColoredTextBox)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.pOracleOnlyOptions.SuspendLayout();
@@ -164,6 +181,7 @@ namespace NHibernateMappingGenerator
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.crudCodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dbConnStrLabel
@@ -219,7 +237,7 @@ namespace NHibernateMappingGenerator
             this.dbTableDetailsGridView.Location = new System.Drawing.Point(3, 3);
             this.dbTableDetailsGridView.Name = "dbTableDetailsGridView";
             this.dbTableDetailsGridView.RowHeadersVisible = false;
-            this.dbTableDetailsGridView.Size = new System.Drawing.Size(913, 345);
+            this.dbTableDetailsGridView.Size = new System.Drawing.Size(913, 300);
             this.dbTableDetailsGridView.TabIndex = 5;
             // 
             // columnName
@@ -288,7 +306,7 @@ namespace NHibernateMappingGenerator
             // 
             // folderTextBox
             // 
-            this.folderTextBox.Location = new System.Drawing.Point(130, 40);
+            this.folderTextBox.Location = new System.Drawing.Point(131, 37);
             this.folderTextBox.Name = "folderTextBox";
             this.folderTextBox.Size = new System.Drawing.Size(486, 20);
             this.folderTextBox.TabIndex = 7;
@@ -296,7 +314,7 @@ namespace NHibernateMappingGenerator
             // 
             // generateButton
             // 
-            this.generateButton.Location = new System.Drawing.Point(11, 205);
+            this.generateButton.Location = new System.Drawing.Point(12, 252);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(106, 23);
             this.generateButton.TabIndex = 8;
@@ -306,7 +324,7 @@ namespace NHibernateMappingGenerator
             // 
             // folderSelectButton
             // 
-            this.folderSelectButton.Location = new System.Drawing.Point(623, 39);
+            this.folderSelectButton.Location = new System.Drawing.Point(624, 36);
             this.folderSelectButton.Name = "folderSelectButton";
             this.folderSelectButton.Size = new System.Drawing.Size(75, 23);
             this.folderSelectButton.TabIndex = 9;
@@ -317,16 +335,16 @@ namespace NHibernateMappingGenerator
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 23);
+            this.label1.Location = new System.Drawing.Point(9, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(363, 13);
+            this.label1.Size = new System.Drawing.Size(390, 13);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Select the folder in which the mapping and domain files would be generated";
+            this.label1.Text = "Select the folder in which the mapping, domain and crud files would be generated";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 128);
+            this.label2.Location = new System.Drawing.Point(12, 149);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 13);
             this.label2.TabIndex = 11;
@@ -334,7 +352,7 @@ namespace NHibernateMappingGenerator
             // 
             // nameSpaceTextBox
             // 
-            this.nameSpaceTextBox.Location = new System.Drawing.Point(130, 124);
+            this.nameSpaceTextBox.Location = new System.Drawing.Point(131, 145);
             this.nameSpaceTextBox.Name = "nameSpaceTextBox";
             this.nameSpaceTextBox.Size = new System.Drawing.Size(486, 20);
             this.nameSpaceTextBox.TabIndex = 12;
@@ -343,7 +361,7 @@ namespace NHibernateMappingGenerator
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 180);
+            this.label3.Location = new System.Drawing.Point(12, 227);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 13;
@@ -351,7 +369,7 @@ namespace NHibernateMappingGenerator
             // 
             // assemblyNameTextBox
             // 
-            this.assemblyNameTextBox.Location = new System.Drawing.Point(130, 176);
+            this.assemblyNameTextBox.Location = new System.Drawing.Point(131, 223);
             this.assemblyNameTextBox.Name = "assemblyNameTextBox";
             this.assemblyNameTextBox.Size = new System.Drawing.Size(486, 20);
             this.assemblyNameTextBox.TabIndex = 14;
@@ -368,7 +386,7 @@ namespace NHibernateMappingGenerator
             // 
             // generateAllBtn
             // 
-            this.generateAllBtn.Location = new System.Drawing.Point(384, 205);
+            this.generateAllBtn.Location = new System.Drawing.Point(385, 252);
             this.generateAllBtn.Name = "generateAllBtn";
             this.generateAllBtn.Size = new System.Drawing.Size(106, 23);
             this.generateAllBtn.TabIndex = 18;
@@ -417,7 +435,7 @@ namespace NHibernateMappingGenerator
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.splitContainer1.Size = new System.Drawing.Size(1159, 383);
+            this.splitContainer1.Size = new System.Drawing.Size(1159, 338);
             this.splitContainer1.SplitterDistance = 228;
             this.splitContainer1.TabIndex = 23;
             // 
@@ -429,7 +447,7 @@ namespace NHibernateMappingGenerator
             this.tableGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableGroupBox.Location = new System.Drawing.Point(0, 0);
             this.tableGroupBox.Name = "tableGroupBox";
-            this.tableGroupBox.Size = new System.Drawing.Size(228, 383);
+            this.tableGroupBox.Size = new System.Drawing.Size(228, 338);
             this.tableGroupBox.TabIndex = 21;
             this.tableGroupBox.TabStop = false;
             this.tableGroupBox.Text = "Select Owner and Table(s)";
@@ -456,7 +474,7 @@ namespace NHibernateMappingGenerator
             this.tablesListBox.Location = new System.Drawing.Point(6, 73);
             this.tablesListBox.Name = "tablesListBox";
             this.tablesListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.tablesListBox.Size = new System.Drawing.Size(216, 290);
+            this.tablesListBox.Size = new System.Drawing.Size(216, 238);
             this.tablesListBox.TabIndex = 6;
             // 
             // ownersComboBox
@@ -475,11 +493,12 @@ namespace NHibernateMappingGenerator
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(927, 377);
+            this.tabControl1.Size = new System.Drawing.Size(927, 332);
             this.tabControl1.TabIndex = 22;
             // 
             // tabPage1
@@ -488,7 +507,7 @@ namespace NHibernateMappingGenerator
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(919, 351);
+            this.tabPage1.Size = new System.Drawing.Size(919, 306);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Table Definition";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -499,7 +518,7 @@ namespace NHibernateMappingGenerator
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(919, 351);
+            this.tabPage2.Size = new System.Drawing.Size(919, 325);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Map Code";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -508,6 +527,7 @@ namespace NHibernateMappingGenerator
             // 
             this.mapCodeFastColoredTextBox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.mapCodeFastColoredTextBox.BackBrush = null;
+            this.mapCodeFastColoredTextBox.ContextMenuStrip = this.mapCodeContextMenuStrip;
             this.mapCodeFastColoredTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.mapCodeFastColoredTextBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.mapCodeFastColoredTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -516,8 +536,22 @@ namespace NHibernateMappingGenerator
             this.mapCodeFastColoredTextBox.Name = "mapCodeFastColoredTextBox";
             this.mapCodeFastColoredTextBox.Paddings = new System.Windows.Forms.Padding(0);
             this.mapCodeFastColoredTextBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.mapCodeFastColoredTextBox.Size = new System.Drawing.Size(913, 345);
+            this.mapCodeFastColoredTextBox.Size = new System.Drawing.Size(913, 319);
             this.mapCodeFastColoredTextBox.TabIndex = 0;
+            // 
+            // mapCodeContextMenuStrip
+            // 
+            this.mapCodeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyMapCodeToolStripMenuItem});
+            this.mapCodeContextMenuStrip.Name = "DomainCodeContextMenuStrip";
+            this.mapCodeContextMenuStrip.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyMapCodeToolStripMenuItem
+            // 
+            this.copyMapCodeToolStripMenuItem.Name = "copyMapCodeToolStripMenuItem";
+            this.copyMapCodeToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyMapCodeToolStripMenuItem.Text = "Copy";
+            this.copyMapCodeToolStripMenuItem.Click += new System.EventHandler(this.copyMapCodeToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -525,7 +559,7 @@ namespace NHibernateMappingGenerator
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(919, 351);
+            this.tabPage3.Size = new System.Drawing.Size(919, 325);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Domain Code";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -534,6 +568,7 @@ namespace NHibernateMappingGenerator
             // 
             this.domainCodeFastColoredTextBox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.domainCodeFastColoredTextBox.BackBrush = null;
+            this.domainCodeFastColoredTextBox.ContextMenuStrip = this.domainCodeContextMenuStrip;
             this.domainCodeFastColoredTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.domainCodeFastColoredTextBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.domainCodeFastColoredTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -542,11 +577,57 @@ namespace NHibernateMappingGenerator
             this.domainCodeFastColoredTextBox.Name = "domainCodeFastColoredTextBox";
             this.domainCodeFastColoredTextBox.Paddings = new System.Windows.Forms.Padding(0);
             this.domainCodeFastColoredTextBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.domainCodeFastColoredTextBox.Size = new System.Drawing.Size(913, 345);
+            this.domainCodeFastColoredTextBox.Size = new System.Drawing.Size(913, 319);
             this.domainCodeFastColoredTextBox.TabIndex = 0;
+            // 
+            // domainCodeContextMenuStrip
+            // 
+            this.domainCodeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyDomainCodeToolStripMenuItem});
+            this.domainCodeContextMenuStrip.Name = "DomainCodeContextMenuStrip";
+            this.domainCodeContextMenuStrip.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyDomainCodeToolStripMenuItem
+            // 
+            this.copyDomainCodeToolStripMenuItem.Name = "copyDomainCodeToolStripMenuItem";
+            this.copyDomainCodeToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyDomainCodeToolStripMenuItem.Text = "Copy";
+            this.copyDomainCodeToolStripMenuItem.Click += new System.EventHandler(this.copyDomainCodeToolStripMenuItem_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.crudCodeFastColoredTextBox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(919, 325);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "CRUD Code";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // crudCodeFastColoredTextBox
+            // 
+            this.crudCodeFastColoredTextBox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.crudCodeFastColoredTextBox.BackBrush = null;
+            this.crudCodeFastColoredTextBox.ContextMenuStrip = this.domainCodeContextMenuStrip;
+            this.crudCodeFastColoredTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.crudCodeFastColoredTextBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.crudCodeFastColoredTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crudCodeFastColoredTextBox.IsReplaceMode = false;
+            this.crudCodeFastColoredTextBox.Location = new System.Drawing.Point(3, 3);
+            this.crudCodeFastColoredTextBox.Name = "crudCodeFastColoredTextBox";
+            this.crudCodeFastColoredTextBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.crudCodeFastColoredTextBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.crudCodeFastColoredTextBox.Size = new System.Drawing.Size(913, 319);
+            this.crudCodeFastColoredTextBox.TabIndex = 1;
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.crudFolderTextBox);
+            this.groupBox5.Controls.Add(this.crudFolderSelectButton);
+            this.groupBox5.Controls.Add(this.namespaceCrudLabel);
+            this.groupBox5.Controls.Add(this.namespaceCrudTextBox);
             this.groupBox5.Controls.Add(this.cancelButton);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.label8);
@@ -566,15 +647,32 @@ namespace NHibernateMappingGenerator
             this.groupBox5.Controls.Add(this.namespaceMapTextBox);
             this.groupBox5.Controls.Add(this.nameSpaceTextBox);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(3, 449);
+            this.groupBox5.Location = new System.Drawing.Point(3, 404);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1159, 239);
+            this.groupBox5.Size = new System.Drawing.Size(1159, 284);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
             // 
+            // namespaceCrudLabel
+            // 
+            this.namespaceCrudLabel.AutoSize = true;
+            this.namespaceCrudLabel.Location = new System.Drawing.Point(12, 201);
+            this.namespaceCrudLabel.Name = "namespaceCrudLabel";
+            this.namespaceCrudLabel.Size = new System.Drawing.Size(110, 13);
+            this.namespaceCrudLabel.TabIndex = 23;
+            this.namespaceCrudLabel.Text = "Namespace (CRUD) :";
+            // 
+            // namespaceCrudTextBox
+            // 
+            this.namespaceCrudTextBox.Location = new System.Drawing.Point(131, 197);
+            this.namespaceCrudTextBox.Name = "namespaceCrudTextBox";
+            this.namespaceCrudTextBox.Size = new System.Drawing.Size(486, 20);
+            this.namespaceCrudTextBox.TabIndex = 24;
+            this.namespaceCrudTextBox.Text = "Sample.CustomerService.Crud";
+            // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(510, 205);
+            this.cancelButton.Location = new System.Drawing.Point(511, 252);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 23);
             this.cancelButton.TabIndex = 22;
@@ -585,7 +683,7 @@ namespace NHibernateMappingGenerator
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 70);
+            this.label9.Location = new System.Drawing.Point(12, 67);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 19;
@@ -594,7 +692,7 @@ namespace NHibernateMappingGenerator
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 44);
+            this.label8.Location = new System.Drawing.Point(12, 41);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 13);
             this.label8.TabIndex = 19;
@@ -603,7 +701,7 @@ namespace NHibernateMappingGenerator
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 99);
+            this.label6.Location = new System.Drawing.Point(12, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 19;
@@ -611,14 +709,14 @@ namespace NHibernateMappingGenerator
             // 
             // entityNameTextBox
             // 
-            this.entityNameTextBox.Location = new System.Drawing.Point(130, 95);
+            this.entityNameTextBox.Location = new System.Drawing.Point(131, 116);
             this.entityNameTextBox.Name = "entityNameTextBox";
             this.entityNameTextBox.Size = new System.Drawing.Size(486, 20);
             this.entityNameTextBox.TabIndex = 20;
             // 
             // domainFolderTextBox
             // 
-            this.domainFolderTextBox.Location = new System.Drawing.Point(130, 67);
+            this.domainFolderTextBox.Location = new System.Drawing.Point(131, 64);
             this.domainFolderTextBox.Name = "domainFolderTextBox";
             this.domainFolderTextBox.Size = new System.Drawing.Size(486, 20);
             this.domainFolderTextBox.TabIndex = 7;
@@ -626,7 +724,7 @@ namespace NHibernateMappingGenerator
             // 
             // domainFolderSelectButton
             // 
-            this.domainFolderSelectButton.Location = new System.Drawing.Point(623, 66);
+            this.domainFolderSelectButton.Location = new System.Drawing.Point(624, 63);
             this.domainFolderSelectButton.Name = "domainFolderSelectButton";
             this.domainFolderSelectButton.Size = new System.Drawing.Size(75, 23);
             this.domainFolderSelectButton.TabIndex = 9;
@@ -637,7 +735,7 @@ namespace NHibernateMappingGenerator
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 154);
+            this.label4.Location = new System.Drawing.Point(12, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 11;
@@ -645,7 +743,7 @@ namespace NHibernateMappingGenerator
             // 
             // namespaceMapTextBox
             // 
-            this.namespaceMapTextBox.Location = new System.Drawing.Point(130, 150);
+            this.namespaceMapTextBox.Location = new System.Drawing.Point(131, 171);
             this.namespaceMapTextBox.Name = "namespaceMapTextBox";
             this.namespaceMapTextBox.Size = new System.Drawing.Size(486, 20);
             this.namespaceMapTextBox.TabIndex = 12;
@@ -817,7 +915,7 @@ namespace NHibernateMappingGenerator
             this.comboBoxForeignCollection.Items.AddRange(new object[] {
             "IList",
             "ICollection",
-            "ISet", //Added Iset so we dont have Full Iesi.Collections.Generic.ISet, and added in Using/Import statment Iesi.Collections.Generic.ISet
+            "ISet",
             "Iesi.Collections.Generic.ISet"});
             this.comboBoxForeignCollection.Location = new System.Drawing.Point(15, 126);
             this.comboBoxForeignCollection.Name = "comboBoxForeignCollection";
@@ -1043,6 +1141,17 @@ namespace NHibernateMappingGenerator
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mapping Style";
             // 
+            // entityFrameworkRadionBtn
+            // 
+            this.entityFrameworkRadionBtn.AutoSize = true;
+            this.entityFrameworkRadionBtn.Location = new System.Drawing.Point(6, 109);
+            this.entityFrameworkRadionBtn.Name = "entityFrameworkRadionBtn";
+            this.entityFrameworkRadionBtn.Size = new System.Drawing.Size(106, 17);
+            this.entityFrameworkRadionBtn.TabIndex = 11;
+            this.entityFrameworkRadionBtn.TabStop = true;
+            this.entityFrameworkRadionBtn.Text = "Entity Framework";
+            this.entityFrameworkRadionBtn.UseVisualStyleBackColor = true;
+            // 
             // castleMappingOption
             // 
             this.castleMappingOption.AutoSize = true;
@@ -1225,7 +1334,7 @@ namespace NHibernateMappingGenerator
             this.toolStripStatusLabel.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.toolStripStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(856, 17);
             this.toolStripStatusLabel.Spring = true;
             this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1236,16 +1345,46 @@ namespace NHibernateMappingGenerator
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(300, 16);
             // 
-            // entityFrameworkRadionBtn
+            // crudCodeContextMenuStrip
             // 
-            this.entityFrameworkRadionBtn.AutoSize = true;
-            this.entityFrameworkRadionBtn.Location = new System.Drawing.Point(6, 109);
-            this.entityFrameworkRadionBtn.Name = "entityFrameworkRadionBtn";
-            this.entityFrameworkRadionBtn.Size = new System.Drawing.Size(106, 17);
-            this.entityFrameworkRadionBtn.TabIndex = 11;
-            this.entityFrameworkRadionBtn.TabStop = true;
-            this.entityFrameworkRadionBtn.Text = "Entity Framework";
-            this.entityFrameworkRadionBtn.UseVisualStyleBackColor = true;
+            this.crudCodeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyCrudCodeToolStripMenuItem});
+            this.crudCodeContextMenuStrip.Name = "DomainCodeContextMenuStrip";
+            this.crudCodeContextMenuStrip.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyCrudCodeToolStripMenuItem
+            // 
+            this.copyCrudCodeToolStripMenuItem.Name = "copyCrudCodeToolStripMenuItem";
+            this.copyCrudCodeToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyCrudCodeToolStripMenuItem.Text = "Copy";
+            this.copyCrudCodeToolStripMenuItem.Click += new System.EventHandler(this.copyCrudCodeToolStripMenuItem_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 93);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Crud File :";
+            // 
+            // crudFolderTextBox
+            // 
+            this.crudFolderTextBox.Location = new System.Drawing.Point(131, 90);
+            this.crudFolderTextBox.Name = "crudFolderTextBox";
+            this.crudFolderTextBox.Size = new System.Drawing.Size(486, 20);
+            this.crudFolderTextBox.TabIndex = 25;
+            this.crudFolderTextBox.Text = "c:\\NHibernate Mapping File Generator";
+            // 
+            // crudFolderSelectButton
+            // 
+            this.crudFolderSelectButton.Location = new System.Drawing.Point(624, 89);
+            this.crudFolderSelectButton.Name = "crudFolderSelectButton";
+            this.crudFolderSelectButton.Size = new System.Drawing.Size(75, 23);
+            this.crudFolderSelectButton.TabIndex = 26;
+            this.crudFolderSelectButton.Text = "&Select";
+            this.crudFolderSelectButton.UseVisualStyleBackColor = true;
+            this.crudFolderSelectButton.Click += new System.EventHandler(this.crudFolderSelectButton_Click);
             // 
             // App
             // 
@@ -1271,8 +1410,12 @@ namespace NHibernateMappingGenerator
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mapCodeFastColoredTextBox)).EndInit();
+            this.mapCodeContextMenuStrip.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.domainCodeFastColoredTextBox)).EndInit();
+            this.domainCodeContextMenuStrip.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.crudCodeFastColoredTextBox)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1298,6 +1441,7 @@ namespace NHibernateMappingGenerator
             this.groupBox1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.crudCodeContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1409,6 +1553,19 @@ namespace NHibernateMappingGenerator
         private CheckBox EnableInflectionsCheckBox;
         private CheckBox nameAsForeignTableCheckBox;
         private RadioButton entityFrameworkRadionBtn;
+        private ContextMenuStrip domainCodeContextMenuStrip;
+        private ToolStripMenuItem copyDomainCodeToolStripMenuItem;
+        private ContextMenuStrip mapCodeContextMenuStrip;
+        private ToolStripMenuItem copyMapCodeToolStripMenuItem;
+        private TabPage tabPage4;
+        private FastColoredTextBoxNS.FastColoredTextBox crudCodeFastColoredTextBox;
+        private ContextMenuStrip crudCodeContextMenuStrip;
+        private ToolStripMenuItem copyCrudCodeToolStripMenuItem;
+        private Label namespaceCrudLabel;
+        private TextBox namespaceCrudTextBox;
+        private Label label10;
+        private TextBox crudFolderTextBox;
+        private Button crudFolderSelectButton;
     }
 }
 

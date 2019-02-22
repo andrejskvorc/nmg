@@ -179,11 +179,11 @@ namespace NMG.Core.Generator
         public CodeSnippetStatement Create(HasMany hasMany)
         {
         	var hasManySnippet = string.Format("HasMany(x => x.{0})", Formatter.FormatPlural(hasMany.Reference));
-        	var keySnippet = hasMany.AllReferenceColumns.Count == 1 ? 
-				string.Format(".KeyColumn(\"{0}\")", hasMany.ReferenceColumn) : 
-				string.Format(".KeyColumns({0})", hasMany.AllReferenceColumns.Aggregate("new string[] { ", (a, b) => a + "\"" + b + "\", ", c => c.Substring(0, c.Length - 2) + " }"));
+            var keySnippet = hasMany.AllReferenceColumns.Count == 1 ?
+                string.Format(".KeyColumn(\"{0}\")", hasMany.ReferenceColumn) :
+                string.Format(".KeyColumn(\"{0}\")", "Id");  //string.Format(".KeyColumns({0})", hasMany.Reference.Aggregate("new string[] { ", (a, b) => a + "\"" + b + "\", ", c => c.Substring(0, c.Length - 2) + " }"));
 
-			return new CodeSnippetStatement(string.Format(AbstractGenerator.TABS + "{0}{1};", hasManySnippet, keySnippet));
+            return new CodeSnippetStatement(string.Format(AbstractGenerator.TABS + "{0}{1};", hasManySnippet, keySnippet));
 		}
 	}
 

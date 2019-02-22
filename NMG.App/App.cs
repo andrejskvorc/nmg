@@ -156,6 +156,7 @@ namespace NHibernateMappingGenerator
 
                 nameSpaceTextBox.Text = applicationSettings.NameSpace;
                 namespaceMapTextBox.Text = applicationSettings.NameSpaceMap;
+                namespaceCrudTextBox.Text = applicationSettings.NameSpaceCrud;
                 assemblyNameTextBox.Text = applicationSettings.AssemblyName;
                 cSharpRadioButton.Checked = applicationSettings.Language == Language.CSharp;
                 vbRadioButton.Checked = applicationSettings.Language == Language.VB;
@@ -287,6 +288,21 @@ namespace NHibernateMappingGenerator
             {
                 mapCodeFastColoredTextBox.Language = FastColoredTextBoxNS.Language.HTML;
             }
+
+            // Crud Code Formatting
+            if (appSettings.Language == Language.CSharp & appSettings.IsByCode || appSettings.IsFluent || appSettings.IsNhFluent || appSettings.IsCastle || appSettings.IsEntityFramework)
+            {
+                crudCodeFastColoredTextBox.Language = FastColoredTextBoxNS.Language.CSharp;
+            }
+            else if (appSettings.Language == Language.VB & appSettings.IsByCode || appSettings.IsFluent || appSettings.IsNhFluent || appSettings.IsCastle || appSettings.IsEntityFramework)
+            {
+                crudCodeFastColoredTextBox.Language = FastColoredTextBoxNS.Language.VB;
+            }
+            else
+            {
+                crudCodeFastColoredTextBox.Language = FastColoredTextBoxNS.Language.HTML;
+            }
+
         }
 
         private void DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -308,6 +324,7 @@ namespace NHibernateMappingGenerator
             }
             applicationSettings.NameSpace = nameSpaceTextBox.Text;
             applicationSettings.NameSpaceMap = namespaceMapTextBox.Text;
+            applicationSettings.NameSpaceCrud = namespaceCrudTextBox.Text;
             applicationSettings.AssemblyName = assemblyNameTextBox.Text;
             applicationSettings.Language = cSharpRadioButton.Checked ? Language.CSharp : Language.VB;
 
@@ -692,13 +709,19 @@ namespace NHibernateMappingGenerator
             {
                 Directory.CreateDirectory(folderPath);
             }
+
             var domainFolderPath = AddSlashToFolderPath(domainFolderTextBox.Text);
+
+            var crudFolderPath = AddSlashToFolderPath(crudFolderTextBox.Text);
+
             if (appSettings.GenerateInFolders)
             {
                 Directory.CreateDirectory(folderPath + "Contract");
                 Directory.CreateDirectory(folderPath + "Domain");
                 Directory.CreateDirectory(folderPath + "Mapping");
+                Directory.CreateDirectory(folderPath + "Crud");
                 domainFolderPath = folderPath;
+                crudFolderPath = folderPath;
             }
             else
             {
@@ -707,6 +730,12 @@ namespace NHibernateMappingGenerator
                 {
                     Directory.CreateDirectory(domainFolderPath);
                 }
+
+                // Crud folder is specified by user
+                if (!Directory.Exists(crudFolderPath))
+                {
+                    Directory.CreateDirectory(crudFolderPath);
+                }
             }
 
             var applicationPreferences = new ApplicationPreferences
@@ -714,8 +743,10 @@ namespace NHibernateMappingGenerator
                                                  ServerType = _currentConnection.Type,
                                                  FolderPath = folderPath,
                                                  DomainFolderPath = domainFolderPath,
+                                                 CrudFolderPath = crudFolderPath,
                                                  TableName = tableName.Name,
                                                  NameSpaceMap = namespaceMapTextBox.Text,
+                                                 NameSpaceCrud = namespaceCrudTextBox.Text,
                                                  NameSpace = nameSpaceTextBox.Text,
                                                  AssemblyName = assemblyNameTextBox.Text,
                                                  Sequence = sequence,
@@ -879,6 +910,7 @@ namespace NHibernateMappingGenerator
             applicationController.Generate(false);
             mapCodeFastColoredTextBox.Text = applicationController.GeneratedMapCode;
             domainCodeFastColoredTextBox.Text = applicationController.GeneratedDomainCode;
+            crudCodeFastColoredTextBox.Text = applicationController.GeneratedCrudeCode;
         }
 
         private void includeForeignKeysCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -886,5 +918,53 @@ namespace NHibernateMappingGenerator
             nameAsForeignTableCheckBox.Enabled = includeForeignKeysCheckBox.Checked;
         }
 
+        private void copyDomainCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (domainCodeFastColoredTextBox.SelectedText.Length <= 0)
+            {
+                Clipboard.SetText(domainCodeFastColoredTextBox.Text);
+            }
+            else
+            {
+                Clipboard.SetText(domainCodeFastColoredTextBox.SelectedText);
+            }
+        }
+
+        private void copyMapCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if(mapCodeFastColoredTextBox.SelectedText.Length <= 0)
+            {
+                Clipboard.SetText(mapCodeFastColoredTextBox.Text);
+            }
+            else
+            {
+                Clipboard.SetText(mapCodeFastColoredTextBox.SelectedText);
+            }
+            
+        }
+
+        private void copyCrudCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (crudCodeFastColoredTextBox.SelectedText.Length <= 0)
+            {
+                Clipboard.SetText(crudCodeFastColoredTextBox.Text);
+            }
+            else
+            {
+                Clipboard.SetText(crudCodeFastColoredTextBox.SelectedText);
+            }
+
+        }
+
+        private void crudFolderSelectButton_Click(object sender, EventArgs e)
+        {
+            var diagResult = folderBrowserDialog.ShowDialog();
+
+            if (diagResult == DialogResult.OK)
+            {
+                crudFolderTextBox.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
     }
 }
